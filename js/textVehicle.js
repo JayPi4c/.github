@@ -13,38 +13,38 @@ function TextVehicle(x, y) {
   this.maxforce = 1;
 }
 
-TextVehicle.prototype.behaviors = function() {
+TextVehicle.prototype.behaviors = function () {
   var arrive = this.arrive(this.target);
   // var mouse = createVector(mouseX, mouseY);
-  
+
   arrive.mult(2);
   this.applyForce(arrive);
 };
 
-TextVehicle.prototype.applyParticle = function(p, firework){
-let vector = firework ? p.firework.pos : p.pos;
+TextVehicle.prototype.applyParticle = function (p, firework) {
+  let vector = firework ? p.firework.pos : p.pos;
   var flee = this.flee(vector);
   flee.mult(firework ? 5 : map(p.lifespan, 0, 255, 0.1, 3));
   this.applyForce(flee);
 }
 
-TextVehicle.prototype.applyForce = function(f) {
+TextVehicle.prototype.applyForce = function (f) {
   this.acc.add(f);
 };
 
-TextVehicle.prototype.update = function() {
+TextVehicle.prototype.update = function () {
   this.pos.add(this.vel);
   this.vel.add(this.acc);
   this.acc.mult(0);
 };
 
-TextVehicle.prototype.show = function() {
+TextVehicle.prototype.show = function () {
   stroke(255);
   strokeWeight(this.r);
   point(this.pos.x, this.pos.y);
 };
 
-TextVehicle.prototype.arrive = function(target) {
+TextVehicle.prototype.arrive = function (target) {
   var desired = p5.Vector.sub(target, this.pos);
   var d = desired.mag();
   var speed = this.maxspeed;
@@ -57,7 +57,7 @@ TextVehicle.prototype.arrive = function(target) {
   return steer;
 };
 
-TextVehicle.prototype.flee = function(target) {
+TextVehicle.prototype.flee = function (target) {
   var desired = p5.Vector.sub(target, this.pos);
   var d = desired.mag();
   if (d < 50) {

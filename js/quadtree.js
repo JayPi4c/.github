@@ -1,3 +1,12 @@
+// Daniel Shiffman
+// http://codingtra.in
+// http://patreon.com/codingtrain
+
+// QuadTree
+// https://www.youtube.com/watch?v=z0YFFg_nBjw
+
+// For more:
+// https://github.com/CodingTrain/QuadTree
 
 class Point {
   constructor(x, y, userData) {
@@ -157,8 +166,8 @@ class QuadTree {
 
     return found;
   }
-  
-  
+
+
   show() {
     stroke(255);
     noFill();
@@ -177,6 +186,5 @@ class QuadTree {
       this.southwest.show();
     }
   }
-
 
 }

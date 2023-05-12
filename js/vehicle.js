@@ -1,3 +1,6 @@
+// Daniel Shiffman
+// http://codingtra.in
+
 class Vehicle {
 
   constructor(x, y) {

@@ -61,7 +61,7 @@ function setup() {
   showCountdown = distance > 0;
 
   calculateTimeAttributes();
-  
+
   // initialize upper Points
   let upperPoints = getUpperPoints();
   upperVehicles = [];
@@ -120,7 +120,7 @@ function draw() {
     textSize(fontSize);
     strokeWeight(5);
     stroke(255);
-    text("\u2764", width / 2, 4.5 * fontSize, fontSize);
+    text("\u2764", width / 2, 4.5 * fontSize, fontSize, fontSize);
     let boundary = new Rectangle(width / 2, height / 2, width, height);
     let qtree = new QuadTree(boundary, 4);
 
@@ -193,7 +193,7 @@ function getVehiclesText() {
 }
 
 function countdown() {
-calculateTimeAttributes();
+  calculateTimeAttributes();
   showCountdown = distance > 0;
 
   // mache die Liste der Punkte neu
@@ -203,8 +203,8 @@ calculateTimeAttributes();
   }
 }
 
-function calculateTimeAttributes(){
-    distance = getTimeLeft();
+function calculateTimeAttributes() {
+  distance = getTimeLeft();
   days = Math.floor(distance / (1000 * 60 * 60 * 24));
   hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));

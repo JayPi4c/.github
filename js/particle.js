@@ -1,3 +1,8 @@
+// Daniel Shiffman
+// http://codingtra.in
+// http://patreon.com/codingtrain
+// Code for: https://youtu.be/CKeyIbT3vXI
+
 class Particle {
 
   constructor(x, y, hu, firework) {
@@ -8,10 +13,8 @@ class Particle {
     this.acc = createVector(0, 0);
     this.vel = p5.Vector.random2D();
     this.vel.mult(random(2, 10));
-    if (this.firework) 
+    if (this.firework)
       this.vel = createVector(0, -(fireworkBoost + (random(1) > 0.5 ? -1 : 1) * random(0.25) * fireworkBoost));
-    
-
   }
 
   applyForce(force) {
