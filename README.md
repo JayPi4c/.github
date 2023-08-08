@@ -1,6 +1,6 @@
 # Welcome!
 
-This page contains a collection of my more or less maintened projects. It's mostly for me to have a collection of all my projects in one place, but you are welcome to look around. 
+This page contains a collection of my more or less maintened projects. It's mostly for me to have an overview of all my projects in one place, but you are welcome to look around. 
 
 ## About me
 
