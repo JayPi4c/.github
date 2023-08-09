@@ -1,0 +1,143 @@
+<!--
+    inspired by 
+    - https://github.com/kasnder/youtube-embedding-consent
+    - https://christianheilmann.com/2022/09/14/quick-tip-embedding-youtube-videos-in-github-pages/
+-->
+
+<div class="video_wrapper" style="background-image: url('{{ url_to_video_thumbnail }}');">
+    <div class="video_trigger" data-source="{{ include.id }}">
+        <p class="text-center">Playing this video requires sharing information with YouTube.<br><a target="_blank"
+                href="https://tosdr.org/#youtube">More information</a></p>
+        <input type="button" class="video-btn" value="Agree" />
+        <p> Thanks to <a href="https://github.com/kasnder/youtube-embedding-consent">kasnder</a> for this opt-in
+            solution</p>
+    </div>
+    <div class="video_layer"><iframe src="" frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+</div>
+
+<style>
+    .video_wrapper {
+        /* Dummy image*/
+        background-image: url("dummy.jpg");
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+        height: 400px;
+        width: 100%;
+    }
+
+    .video_wrapper .video_trigger {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        z-index: 9;
+        /* Centre content */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        flex-direction: column;
+    }
+
+    .video_wrapper .video_layer {
+        position: relative;
+        display: none;
+        height: inherit;
+        width: inherit;
+        margin: auto;
+    }
+
+    .video_wrapper .video_layer iframe {
+        border: 0px none transparent;
+        height: inherit;
+        width: inherit;
+        padding: 0;
+    }
+
+    .video_wrapper .video-btn {
+        cursor: pointer;
+        display: inline-block;
+        transition: color 0.5s, background-color 0.5s, border 0.5s;
+        padding: 8px 16px;
+        font-size: 16px;
+        background-color: transparent;
+        color: #fff;
+        border: 1px solid #fff;
+        border-radius: 3px;
+    }
+
+    .video_wrapper .video-btn:hover {
+        background-color: #fff;
+        color: #000;
+    }
+</style>
+
+<script>
+    /* Cookie functionality by https://www.w3schools.com/js/js_cookies.asp */
+    function setCookie(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        var expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    function unblockVideos() {
+        document.querySelectorAll('.video_wrapper .video_trigger').forEach(function (_trigger) {
+            _trigger.style.display = 'none';
+
+            // seek video_layer element
+            for (var i = 0; i < _trigger.parentNode.childNodes.length; i++) {
+                var video_layer = _trigger.parentNode.childNodes[i];
+                if (video_layer.className == "video_layer") {
+                    video_layer.style.display = 'block';
+
+                    // seek iframe element
+                    for (var j = 0; j < video_layer.childNodes.length; j++) {
+                        var iframe = video_layer.childNodes[j];
+                        if (iframe.tagName !== undefined && iframe.tagName.toLowerCase() == 'iframe') {
+                            var videoId = _trigger.getAttribute('data-source');
+                            iframe.src = 'https://www.youtube-nocookie.com/embed/' + videoId + '?controls=1&showinfo=0&autoplay=0&mute=1';
+                        }
+                    }
+                }
+            }
+        });
+    }
+    document.addEventListener("DOMContentLoaded", function (event) {
+        if (getCookie("youtube-consent") == 1) {
+            unblockVideos();
+        } else {
+            document.querySelectorAll('.video_wrapper .video_trigger .video-btn').forEach(function (node) {
+                node.addEventListener("click", function (event) {
+                    setCookie('youtube-consent', 1, 365);
+                    unblockVideos();
+                });
+            });
+        }
+    });
+</script>
