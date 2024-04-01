@@ -1,16 +1,15 @@
 // made by JayPi4c
-// 16 april 2019
-// 10.03.2020
-// 21.05.2022
+// created: 16 april 2019
+// last edited: 01.04.2024
 // Dieses Skript zählt zu verschiedenen Uhrzeiten abhängig von dem Wochentag
 // Die Grundmechaniken in diesem Skript stammen von Daniel Shiffman's Coding Train
 
-window.onorientationchange = () => window.location.reload();
+window.addEventListener("resize", () => window.location.reload());
 
-const upperLineText = "Offen für";
-const lowerLineText = "Jobanfragen";
+const upperLineText = "next stage";
+const lowerLineText = "completed";
 
-const targetDate = new Date(2024, 0, 1, 0, 0, 0);
+const targetDate = new Date(2026, 9, 1, 0, 0, 0);
 
 let showCountdown;
 
