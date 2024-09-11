@@ -2,6 +2,7 @@
 // 16 april 2019
 // 10.03.2020
 // 21.05.2022
+// 11.09.2024
 // Dieses Skript zählt zu verschiedenen Uhrzeiten abhängig von dem Wochentag
 // Die Grundmechaniken in diesem Skript stammen von Daniel Shiffman's Coding Train
 
@@ -10,7 +11,7 @@ window.onorientationchange = () => window.location.reload();
 const upperLineText = "Offen für";
 const lowerLineText = "Jobanfragen";
 
-const targetDate = new Date(2024, 0, 1, 0, 0, 0);
+const targetDate = new Date(2026, 0, 1, 0, 0, 0);
 
 let showCountdown;
 
